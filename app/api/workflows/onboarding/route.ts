@@ -28,7 +28,7 @@ export const { POST } = serve<InitialData>(async (context) => {
       })
     }
 
-    await context.sleep("wait-for-1-month", 60 * 60 * 24 * 30)
+    await context.sleep("wait-for-1 -month", 60 * 60 * 24 * 30)
   }
 })
 

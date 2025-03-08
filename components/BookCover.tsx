@@ -1,7 +1,11 @@
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+"use client";
+
 import React from "react";
-import BookCoverSvg from "./BookCoverSvg";
+import { cn } from "@/lib/utils";
+import BookCoverSvg from "@/components/BookCoverSvg";
+import { IKImage } from "imagekitio-next";
+import config from "@/lib/config";
+import Image from "next/image";
 
 type BookCoverVariant = "extraSmall" | "small" | "medium" | "regular" | "wide";
 
@@ -14,37 +18,42 @@ const variantStyles: Record<BookCoverVariant, string> = {
 };
 
 interface Props {
-  className: string;
-  variant: BookCoverVariant;
+  className?: string;
+  variant?: BookCoverVariant;
   coverColor: string;
   coverImage: string;
 }
+
 const BookCover = ({
   className,
   variant = "regular",
   coverColor = "#012B48",
-  coverImage = "http://placeholde.co/400*600/png",
+  coverImage = "https://placehold.co/400x600.png",
 }: Props) => {
   return (
     <div
       className={cn(
-        "relative transition-all duration-300 ",
+        "relative transition-all duration-300",
         variantStyles[variant],
-        className
+        className,
       )}
     >
+      <BookCoverSvg coverColor={coverColor} />
 
-      <BookCoverSvg coverColor={coverColor}/>
-      <div className="absolute z-10 " style={{ left: "87.9%", height: "88%" }}>
-        <Image
+      <div
+        className="absolute z-10"
+        style={{ left: "12%", width: "87.5%", height: "88%" }}
+      >
+         <Image
           src={coverImage}
           alt="Book cover"
           fill
-          className="rounded-sm object-fill"
+          className="rounded-sm object-cover"
         />
       </div>
-    </div>
+      </div>
   );
 };
-
 export default BookCover;
+
+      
